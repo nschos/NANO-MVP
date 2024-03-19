@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CompactMoviePosterView" customModule="NetworkCallsGA" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="Mo4-jc-Eht"/>
+                <outlet property="imagePosterView" destination="ipx-zj-gKA" id="Bbh-cP-EbA"/>
+                <outlet property="ratingLabel" destination="Lc1-3z-kpr" id="zPT-pJ-dyW"/>
+                <outlet property="titleLabel" destination="jHt-8S-gKt" id="Qpw-iG-YTj"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="158" height="304"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" verticalCompressionResistancePriority="749" image="Minato" translatesAutoresizingMaskIntoConstraints="NO" id="ipx-zj-gKA">
+                    <rect key="frame" x="0.0" y="0.0" width="158" height="237"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="ipx-zj-gKA" secondAttribute="height" multiplier="2:3" id="6Kv-wb-t1d"/>
+                        <constraint firstAttribute="height" constant="237" id="84b-is-Jlv"/>
+                    </constraints>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" axis="vertical" distribution="fillProportionally" spacing="1" translatesAutoresizingMaskIntoConstraints="NO" id="EoU-UN-P5c">
+                    <rect key="frame" x="0.0" y="246" width="158" height="50"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Spider-verse" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jHt-8S-gKt">
+                            <rect key="frame" x="0.0" y="0.0" width="158" height="30"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="ONC-FO-AGQ">
+                            <rect key="frame" x="0.0" y="31" width="158" height="19"/>
+                            <subviews>
+                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="Adq-Dw-iE7">
+                                    <rect key="frame" x="0.0" y="-0.33333333333333215" width="20" height="18.666666666666664"/>
+                                    <color key="tintColor" systemColor="systemGrayColor"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" secondItem="Adq-Dw-iE7" secondAttribute="height" multiplier="20:19" id="WcD-eL-JR6"/>
+                                        <constraint firstAttribute="width" constant="20" id="oqv-oU-FYl"/>
+                                    </constraints>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10,0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lc1-3z-kpr">
+                                    <rect key="frame" x="25" y="0.0" width="133" height="19"/>
+                                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                                    <color key="textColor" systemColor="systemGrayColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="FiX-4X-r1j"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="EoU-UN-P5c" firstAttribute="top" relation="greaterThanOrEqual" secondItem="ipx-zj-gKA" secondAttribute="bottom" constant="4" id="9l2-md-JrE"/>
+                <constraint firstItem="EoU-UN-P5c" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="B88-Kp-ZSB"/>
+                <constraint firstItem="ipx-zj-gKA" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="BQZ-xV-uGo"/>
+                <constraint firstItem="ipx-zj-gKA" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" id="Bt8-mR-RXl"/>
+                <constraint firstAttribute="bottom" secondItem="EoU-UN-P5c" secondAttribute="bottom" constant="8" id="ZRv-PG-Ft2"/>
+                <constraint firstItem="ipx-zj-gKA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="btW-D6-nCa"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="EoU-UN-P5c" secondAttribute="trailing" id="re4-Hl-6bK"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-174.04580152671755" y="247.18309859154931"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Minato" width="225" height="225"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>

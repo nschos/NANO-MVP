@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21679"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SmallMoviePosterView" customModule="NetworkCallsGA" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="iN0-l3-epB" id="zlh-Od-FzN"/>
+                <outlet property="imagePosterView" destination="t0H-Hl-2DI" id="ktf-D9-O4G"/>
+                <outlet property="overview" destination="LhZ-lE-7WZ" id="Qpx-UZ-I4m"/>
+                <outlet property="ratingLabel" destination="frE-4h-xXG" id="bXI-Q8-pIZ"/>
+                <outlet property="titleLabel" destination="rlS-W9-s7w" id="cre-uF-utT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="327" height="175"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Minato" translatesAutoresizingMaskIntoConstraints="NO" id="t0H-Hl-2DI">
+                    <rect key="frame" x="0.0" y="0.0" width="116.66666666666667" height="175"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="175" id="qvE-2S-LPl"/>
+                        <constraint firstAttribute="width" secondItem="t0H-Hl-2DI" secondAttribute="height" multiplier="2:3" id="zPl-Tu-CIQ"/>
+                    </constraints>
+                </imageView>
+                <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Hjg-59-EeO">
+                    <rect key="frame" x="132.66666666666663" y="144" width="178.33333333333337" height="23"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ge3-JQ-WiA">
+                            <rect key="frame" x="0.0" y="-0.33333333333333215" width="22" height="22.666666666666664"/>
+                            <color key="tintColor" systemColor="systemGrayColor"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="22" id="NQX-bx-c52"/>
+                                <constraint firstAttribute="width" secondItem="ge3-JQ-WiA" secondAttribute="height" multiplier="22:23" id="gf9-2Y-8Dd"/>
+                            </constraints>
+                        </imageView>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="frE-4h-xXG">
+                            <rect key="frame" x="27" y="0.0" width="151.33333333333334" height="23"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                            <color key="textColor" systemColor="systemGrayColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ne8-vG-XvM">
+                    <rect key="frame" x="132.66666666666663" y="31.999999999999996" width="178.33333333333337" height="36.666666666666657"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rlS-W9-s7w">
+                            <rect key="frame" x="0.0" y="0.0" width="178.33333333333334" height="20.333333333333332"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LhZ-lE-7WZ">
+                            <rect key="frame" x="0.0" y="22.333333333333336" width="178.33333333333334" height="14.333333333333336"/>
+                            <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
+                            <color key="textColor" systemColor="systemGrayColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="t0H-Hl-2DI" secondAttribute="bottom" id="3dJ-xG-uOK"/>
+                <constraint firstItem="ne8-vG-XvM" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="32" id="J1M-pW-2Wo"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="ne8-vG-XvM" secondAttribute="bottom" constant="8" id="MJa-de-mUm"/>
+                <constraint firstItem="t0H-Hl-2DI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="ThL-7b-KLr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="ne8-vG-XvM" secondAttribute="trailing" constant="16" id="UIC-l6-A4p"/>
+                <constraint firstItem="ne8-vG-XvM" firstAttribute="leading" secondItem="t0H-Hl-2DI" secondAttribute="trailing" constant="16" id="XvN-55-AI1"/>
+                <constraint firstItem="Hjg-59-EeO" firstAttribute="leading" secondItem="t0H-Hl-2DI" secondAttribute="trailing" constant="16" id="g5E-1T-PEz"/>
+                <constraint firstItem="t0H-Hl-2DI" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="mSS-Mw-nRp"/>
+                <constraint firstAttribute="trailing" secondItem="Hjg-59-EeO" secondAttribute="trailing" constant="16" id="pHf-dC-Z0v"/>
+                <constraint firstAttribute="bottom" secondItem="Hjg-59-EeO" secondAttribute="bottom" constant="8" id="yjN-Ek-eCj"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="89.312977099236633" y="243.3098591549296"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Minato" width="225" height="225"/>
+        <image name="star" catalog="system" width="128" height="116"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGrayColor">
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
