@@ -7,17 +7,23 @@
 
 import UIKit
 
+
 class DetailsViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     static var cellID: String = "detailCell"
     
-    var movie: Movie!
-
+    private var detailsPresenter: DetailsPresenter!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+    
+    func setDetailsPresenter(detailsPresenter: DetailsPresenter) {
+        self.detailsPresenter = detailsPresenter
     }
 }
 
@@ -30,18 +36,44 @@ extension DetailsViewController: UITableViewDelegate {
 extension DetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        detailsPresenter.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.cellID, for: indexPath) as! DetailsMovieCell
         
-        cell.posterView.image = UIImage(data:self.movie.imageCover!)
-        cell.titleLabel.text = self.movie.title
-        cell.tagsLabel.text = MovieService().getGenresText(listId: self.movie.genre_ids)
-        cell.ratingsLabel.text = "\(self.movie.vote_average)"
-        cell.descriptionLabel.text = self.movie.overview
+        let detailViewModel = detailsPresenter.makeDetailViewModel(for: indexPath.row)
+        
+        cell.posterView.image = UIImage(data: detailViewModel.imageCoverData ?? Data())
+        cell.titleLabel.text = detailViewModel.title
+        cell.descriptionLabel.text = detailViewModel.description
+        cell.tagsLabel.text = detailViewModel.overview
+        cell.ratingsLabel.text = detailViewModel.voteAverage
         
         return cell
     }
+    
+}
+
+private extension DetailsPresenter {
+    
+    typealias DetailViewModel = (imageCoverData: Data?, title: String, description: String, overview: String, voteAverage: String)
+    
+    func makeDetailViewModel(for index: Int) -> DetailViewModel {
+        let imageCoverData = getImageCoverData()
+        let title = getTitle()
+        let description = getDescription()
+        let overview = getOverview()
+        let voteAverage = getVoteAverage()
+        
+        let detailViewModel = DetailViewModel(imageCoverData: imageCoverData, 
+                                              title: title,
+                                              description: description,
+                                              overview: overview,
+                                              voteAverage: voteAverage)
+        
+        return detailViewModel
+    }
+    
 }

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0083324F2BAA260000E01A57 /* DetailsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0083324E2BAA260000E01A57 /* DetailsPresenter.swift */; };
 		1B73D4AA2A4B3DE100A791C2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73D4A92A4B3DE100A791C2 /* AppDelegate.swift */; };
 		1B73D4AC2A4B3DE100A791C2 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B73D4AB2A4B3DE100A791C2 /* SceneDelegate.swift */; };
 		1B73D4B32A4B3DE200A791C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B73D4B22A4B3DE200A791C2 /* Assets.xcassets */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0083324E2BAA260000E01A57 /* DetailsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsPresenter.swift; sourceTree = "<group>"; };
 		1B73D4A62A4B3DE100A791C2 /* NetworkCallsTemplate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetworkCallsTemplate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B73D4A92A4B3DE100A791C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1B73D4AB2A4B3DE100A791C2 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -47,6 +49,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0083324D2BAA25C300E01A57 /* Presenters */ = {
+			isa = PBXGroup;
+			children = (
+				0083324E2BAA260000E01A57 /* DetailsPresenter.swift */,
+			);
+			path = Presenters;
+			sourceTree = "<group>";
+		};
 		1B73D49D2A4B3DE100A791C2 = {
 			isa = PBXGroup;
 			children = (
@@ -70,6 +80,7 @@
 				7C8695B32A4CA6B10014CD12 /* Service */,
 				1B73D4CF2A4B402C00A791C2 /* App */,
 				1B73D4C92A4B3EF400A791C2 /* Storyboards */,
+				0083324D2BAA25C300E01A57 /* Presenters */,
 				1B73D4BD2A4B3E8F00A791C2 /* Views */,
 				1B73D4B22A4B3DE200A791C2 /* Assets.xcassets */,
 				1B73D4B72A4B3DE200A791C2 /* Info.plist */,
@@ -201,6 +212,7 @@
 				1B73D4AC2A4B3DE100A791C2 /* SceneDelegate.swift in Sources */,
 				7C7279E92BAA035F0052B932 /* Movie.swift in Sources */,
 				1B73D4C62A4B3E8F00A791C2 /* DetailsViewController.swift in Sources */,
+				0083324F2BAA260000E01A57 /* DetailsPresenter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
