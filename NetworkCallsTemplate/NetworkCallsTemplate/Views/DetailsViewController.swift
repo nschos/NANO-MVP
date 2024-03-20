@@ -10,6 +10,7 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
+    
     @IBOutlet weak var tableView: UITableView!
     static var cellID: String = "detailCell"
     
@@ -17,6 +18,7 @@ class DetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
@@ -33,7 +35,7 @@ extension DetailsViewController: UITableViewDelegate {
     }
 }
 
-extension DetailsViewController: UITableViewDataSource {
+extension DetailsViewController: UITableViewDataSource, ListMoviesViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         detailsPresenter.numberOfRows()
@@ -42,7 +44,7 @@ extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.cellID, for: indexPath) as! DetailsMovieCell
-        
+
         let detailViewModel = detailsPresenter.makeDetailViewModel(for: indexPath.row)
         
         cell.posterView.image = UIImage(data: detailViewModel.imageCoverData ?? Data())
@@ -50,6 +52,7 @@ extension DetailsViewController: UITableViewDataSource {
         cell.descriptionLabel.text = detailViewModel.description
         cell.tagsLabel.text = detailViewModel.overview
         cell.ratingsLabel.text = detailViewModel.voteAverage
+      
         
         return cell
     }
@@ -76,4 +79,5 @@ private extension DetailsPresenter {
         return detailViewModel
     }
     
+
 }
