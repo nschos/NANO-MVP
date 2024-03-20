@@ -7,28 +7,25 @@
 
 import UIKit
 
+
 class DetailsViewController: UIViewController {
     
     
     @IBOutlet weak var tableView: UITableView!
     static var cellID: String = "detailCell"
     
-    var moviePresenter: MoviesPresenter!
-    
-
-    var section: Int = 0
-    var rowNumber: Int = 0
-    
+    private var detailsPresenter: DetailsPresenter!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.moviePresenter.setViewDelegate(listMoviesViewDelegate: self)
-        
-        section = moviePresenter.getDetailsSection()
-        rowNumber = moviePresenter.getDetailsRow()
+
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+    
+    func setDetailsPresenter(detailsPresenter: DetailsPresenter) {
+        self.detailsPresenter = detailsPresenter
     }
 }
 
@@ -41,30 +38,46 @@ extension DetailsViewController: UITableViewDelegate {
 extension DetailsViewController: UITableViewDataSource, ListMoviesViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        detailsPresenter.numberOfRows()
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Self.cellID, for: indexPath) as! DetailsMovieCell
         
-        moviePresenter.getImage(indexPath: indexPath, rowNumber: self.rowNumber, section: self.section) { image in
-            if let correctImage = image {
-                cell.posterView.image = correctImage
-            }
-        }
-        cell.titleLabel.text = moviePresenter.getName(rowNumber: self.rowNumber, section: self.section)
-        cell.tagsLabel.text = moviePresenter.getGenres(rowNumber: self.rowNumber, section: self.section)
-        cell.ratingsLabel.text = "\(moviePresenter.getRating(rowNumber: self.rowNumber, section: self.section))"
-        cell.descriptionLabel.text = moviePresenter.getDescription(rowNumber: self.rowNumber, section: self.section)
+        let cell = tableView.dequeueReusableCell(withIdentifier: Self.cellID, for: indexPath) as! DetailsMovieCell
+
+        let detailViewModel = detailsPresenter.makeDetailViewModel(for: indexPath.row)
+        
+        cell.posterView.image = UIImage(data: detailViewModel.imageCoverData ?? Data())
+        cell.titleLabel.text = detailViewModel.title
+        cell.descriptionLabel.text = detailViewModel.description
+        cell.tagsLabel.text = detailViewModel.overview
+        cell.ratingsLabel.text = detailViewModel.voteAverage
+      
         
         return cell
     }
     
-    func updateData() {
-        self.tableView.reloadData()
+}
+
+private extension DetailsPresenter {
+    
+    typealias DetailViewModel = (imageCoverData: Data?, title: String, description: String, overview: String, voteAverage: String)
+    
+    func makeDetailViewModel(for index: Int) -> DetailViewModel {
+        let imageCoverData = getImageCoverData()
+        let title = getTitle()
+        let description = getDescription()
+        let overview = getOverview()
+        let voteAverage = getVoteAverage()
+        
+        let detailViewModel = DetailViewModel(imageCoverData: imageCoverData, 
+                                              title: title,
+                                              description: description,
+                                              overview: overview,
+                                              voteAverage: voteAverage)
+        
+        return detailViewModel
     }
     
-    func reloadTableViewAt(indexPath: IndexPath) {
-        self.tableView.reloadRows(at: [indexPath], with: .automatic)
-    }
+
 }

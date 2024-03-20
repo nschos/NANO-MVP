@@ -33,8 +33,9 @@ class ViewController: UIViewController {
         if segue.identifier == Self.segueID,
            let presenter = sender as? MoviesPresenter {
             let destination = segue.destination as! DetailsViewController
-            
-            destination.moviePresenter = presenter
+            // let detailsPresenter = presenter.makeDetailsPresenter(for: index)
+//            destination.setDetailsPresenter(detailsPresenter: detailsPresenter)
+
         }
     }
 }
@@ -106,3 +107,17 @@ extension ViewController: ListMoviesViewDelegate{
     
     
 }
+
+// Na outra branch
+
+// Presenter deles
+
+//func makeDetailsPresenter(for index: Int) -> DetailsPresenter {
+//
+//      let selectedMovie = service.movies[index]
+//
+//      let detailsPresenter = DetailsPresenter(selectedMovie: selectedMovie)
+//
+//      return detailsPresenter
+//
+//}
