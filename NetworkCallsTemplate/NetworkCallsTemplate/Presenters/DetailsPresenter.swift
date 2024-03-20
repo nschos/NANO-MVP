@@ -9,6 +9,7 @@ import Foundation
 
 class DetailsPresenter {
     private let selectedMovie: Movie
+    private let movieService = MovieService()
     
     init(selectedMovie: Movie) {
         self.selectedMovie = selectedMovie
@@ -16,6 +17,10 @@ class DetailsPresenter {
     
     func numberOfRows() ->  Int {
         return 1
+    }
+    
+    func getTags() -> String {
+        return movieService.getGenresText(listId: selectedMovie.genre_ids)
     }
     
     func getImageCoverData() -> Data? {
@@ -27,7 +32,7 @@ class DetailsPresenter {
     }
     
     func getDescription() -> String {
-        return selectedMovie.description
+        return selectedMovie.overview
     }
     
     func getOverview() -> String {

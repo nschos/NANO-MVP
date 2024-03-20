@@ -31,10 +31,11 @@ class ViewController: UIViewController {
     //MARK: Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == Self.segueID,
-           let presenter = sender as? MoviesPresenter {
+           let presenter = sender as? DetailsPresenter {
             let destination = segue.destination as! DetailsViewController
             // let detailsPresenter = presenter.makeDetailsPresenter(for: index)
 //            destination.setDetailsPresenter(detailsPresenter: detailsPresenter)
+            destination.setDetailsPresenter(detailsPresenter: presenter)
 
         }
     }
@@ -47,8 +48,8 @@ extension ViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
         let currentSection = indexPath.section
         
-        moviePresenter.prepareForSegue(section: currentSection, rowNumber: indexPath.row)
-        self.performSegue(withIdentifier: Self.segueID, sender: moviePresenter)
+        //moviePresenter.prepareForSegue(section: currentSection, rowNumber: indexPath.row)
+        self.performSegue(withIdentifier: Self.segueID, sender: moviePresenter.makeDetailsPresenter(section: indexPath.section, rowNumber: indexPath.row))
     }
 }
 

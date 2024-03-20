@@ -35,7 +35,7 @@ extension DetailsViewController: UITableViewDelegate {
     }
 }
 
-extension DetailsViewController: UITableViewDataSource, ListMoviesViewDelegate {
+extension DetailsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         detailsPresenter.numberOfRows()
@@ -49,7 +49,7 @@ extension DetailsViewController: UITableViewDataSource, ListMoviesViewDelegate {
         
         cell.posterView.image = UIImage(data: detailViewModel.imageCoverData ?? Data())
         cell.titleLabel.text = detailViewModel.title
-        cell.descriptionLabel.text = detailViewModel.description
+        cell.descriptionLabel.text = detailViewModel.descriptionn
         cell.tagsLabel.text = detailViewModel.overview
         cell.ratingsLabel.text = detailViewModel.voteAverage
       
@@ -61,18 +61,18 @@ extension DetailsViewController: UITableViewDataSource, ListMoviesViewDelegate {
 
 private extension DetailsPresenter {
     
-    typealias DetailViewModel = (imageCoverData: Data?, title: String, description: String, overview: String, voteAverage: String)
+    typealias DetailViewModel = (imageCoverData: Data?, title: String, descriptionn: String, overview: String, voteAverage: String)
     
     func makeDetailViewModel(for index: Int) -> DetailViewModel {
         let imageCoverData = getImageCoverData()
         let title = getTitle()
-        let description = getDescription()
-        let overview = getOverview()
+        let description = getOverview()
+        let overview = getTags()
         let voteAverage = getVoteAverage()
         
         let detailViewModel = DetailViewModel(imageCoverData: imageCoverData, 
                                               title: title,
-                                              description: description,
+                                              descriptionn: description,
                                               overview: overview,
                                               voteAverage: voteAverage)
         

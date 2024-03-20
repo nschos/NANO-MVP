@@ -147,6 +147,15 @@ class MoviesPresenter: PresenterDelegate {
         return 2
     }
     
+    func makeDetailsPresenter(section: Int, rowNumber: Int) -> DetailsPresenter {
+        
+        let selectedMovie = section == 0 ? nowPlaying[rowNumber] : popular[rowNumber]
+        
+        let detailsPresenter = DetailsPresenter(selectedMovie: selectedMovie)
+        
+        return detailsPresenter
+    }
+    
     func fetchData(){
         movieService.fetchData {
             //self.listMoviesViewDelegate?.updateData()
