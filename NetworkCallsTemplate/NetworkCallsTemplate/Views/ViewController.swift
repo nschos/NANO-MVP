@@ -22,7 +22,7 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         
         self.moviePresenter.setViewDelegate(listMoviesViewDelegate: self)
-        moviePresenter.fetchData()
+        moviePresenter.viewDidLoad()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self

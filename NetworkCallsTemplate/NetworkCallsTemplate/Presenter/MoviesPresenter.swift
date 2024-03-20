@@ -42,6 +42,12 @@ class MoviesPresenter: PresenterDelegate {
         return detailsSection
     }
     
+    func viewDidLoad(){
+        movieService.fetchData {
+            
+        }
+    }
+    
     func getDetailsRow() -> Int{
         return detailsRowNumber
     }
