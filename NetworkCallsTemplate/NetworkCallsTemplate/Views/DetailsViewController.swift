@@ -9,13 +9,24 @@ import UIKit
 
 class DetailsViewController: UIViewController {
     
+    
     @IBOutlet weak var tableView: UITableView!
     static var cellID: String = "detailCell"
     
-    var movie: Movie!
+    var moviePresenter: MoviesPresenter!
+    
 
+    var section: Int = 0
+    var rowNumber: Int = 0
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.moviePresenter.setViewDelegate(listMoviesViewDelegate: self)
+        
+        section = moviePresenter.getDetailsSection()
+        rowNumber = moviePresenter.getDetailsRow()
+        
         self.tableView.delegate = self
         self.tableView.dataSource = self
     }
@@ -27,7 +38,7 @@ extension DetailsViewController: UITableViewDelegate {
     }
 }
 
-extension DetailsViewController: UITableViewDataSource {
+extension DetailsViewController: UITableViewDataSource, ListMoviesViewDelegate {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
@@ -36,12 +47,24 @@ extension DetailsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Self.cellID, for: indexPath) as! DetailsMovieCell
         
-        cell.posterView.image = UIImage(data:self.movie.imageCover!)
-        cell.titleLabel.text = self.movie.title
-        cell.tagsLabel.text = MovieService().getGenresText(listId: self.movie.genre_ids)
-        cell.ratingsLabel.text = "\(self.movie.vote_average)"
-        cell.descriptionLabel.text = self.movie.overview
+        moviePresenter.getImage(indexPath: indexPath, rowNumber: self.rowNumber, section: self.section) { image in
+            if let correctImage = image {
+                cell.posterView.image = correctImage
+            }
+        }
+        cell.titleLabel.text = moviePresenter.getName(rowNumber: self.rowNumber, section: self.section)
+        cell.tagsLabel.text = moviePresenter.getGenres(rowNumber: self.rowNumber, section: self.section)
+        cell.ratingsLabel.text = "\(moviePresenter.getRating(rowNumber: self.rowNumber, section: self.section))"
+        cell.descriptionLabel.text = moviePresenter.getDescription(rowNumber: self.rowNumber, section: self.section)
         
         return cell
+    }
+    
+    func updateData() {
+        self.tableView.reloadData()
+    }
+    
+    func reloadTableViewAt(indexPath: IndexPath) {
+        self.tableView.reloadRows(at: [indexPath], with: .automatic)
     }
 }
