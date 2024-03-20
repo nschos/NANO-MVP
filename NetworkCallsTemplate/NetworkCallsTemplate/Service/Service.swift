@@ -23,6 +23,7 @@ class MovieService: JSONDecoder{
     var rawDataPop: Data?
     var rawDataNow: Data?
     var tableDelegate: tableReload?
+    var presenterDelegate: PresenterDelegate?
     
     var movieListPop: [Movie] = []
     var movieListNow: [Movie] = []
@@ -39,7 +40,7 @@ class MovieService: JSONDecoder{
         return finalStr
     }
     
-    func fetchData(){
+    func fetchData(completion: @escaping () -> Void){
         
         let urlPop = URL(string: popURL)!
         let urlNow = URL(string: nowURL)!
@@ -54,7 +55,10 @@ class MovieService: JSONDecoder{
                 print(error ?? "error")
                 return
             }
-            self.decodeData(data: data, movieType: .popular)
+            self.decodeData(data: data, movieType: .popular) {
+                print("??")
+                self.presenterDelegate?.updateValues()
+            }
             
             
         }
@@ -71,15 +75,17 @@ class MovieService: JSONDecoder{
                 return
             }
             
-            self.decodeData(data: data, movieType: .nowPlaying)
+            self.decodeData(data: data, movieType: .nowPlaying) {
+                self.presenterDelegate?.updateValues()
+            }
             
         }
         .resume()
         
-        
+        completion()
     }
     
-    func decodeData(data: Data, movieType: MovieCategory){
+    func decodeData(data: Data, movieType: MovieCategory, closure: @escaping () -> Void){
         do{
             switch(movieType){
             case .nowPlaying:
@@ -94,7 +100,7 @@ class MovieService: JSONDecoder{
             }
             
             DispatchQueue.main.async {
-                self.tableDelegate?.willReload()
+                closure()
             }
         }catch{
             print(error)
