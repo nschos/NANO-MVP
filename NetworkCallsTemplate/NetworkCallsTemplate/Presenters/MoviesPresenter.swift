@@ -15,10 +15,12 @@ protocol ListMoviesViewDelegate: NSObject{
 
 protocol PresenterDelegate{
     func updateValues()
+    func stopLoading()
 }
 
 
 class MoviesPresenter: PresenterDelegate {
+    
     
     private var movieService =  MovieService()
     weak private var listMoviesViewDelegate: ListMoviesViewDelegate?
@@ -29,6 +31,8 @@ class MoviesPresenter: PresenterDelegate {
     
     private var detailsSection = 0
     private var detailsRowNumber = 0
+    
+    private var isLoading = false
     
     init() {
         self.movieService.presenterDelegate = self
@@ -147,6 +151,12 @@ class MoviesPresenter: PresenterDelegate {
         return 2
     }
     
+    func viewRefreshed() {
+        movieService.fetchData {
+            
+        }
+    }
+    
     func makeDetailsPresenter(section: Int, rowNumber: Int) -> DetailsPresenter {
         
         let selectedMovie = section == 0 ? nowPlaying[rowNumber] : popular[rowNumber]
@@ -168,5 +178,18 @@ class MoviesPresenter: PresenterDelegate {
         self.listMoviesViewDelegate?.updateData()
     }
     
+    func viewDidScrollBottom() {
+        print("chamouScrollBottom")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+            if !self.isLoading && !self.popular.isEmpty{
+                self.isLoading = true
+                self.movieService.increasePage()
+            }
+        }
+    }
+    
+    func stopLoading() {
+        self.isLoading = false
+    }
     
 }

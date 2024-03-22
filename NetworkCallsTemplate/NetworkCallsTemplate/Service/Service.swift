@@ -18,7 +18,11 @@ class MovieService: JSONDecoder{
     
     private var nowURL = "https://api.themoviedb.org/3/movie/now_playing?language=en-US&page=1&api_key=70d908007f9009ecd412cca6ab70b158"
     
-    private var popURL = "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&api_key=70d908007f9009ecd412cca6ab70b158"
+    private var popURLFirst = "https://api.themoviedb.org/3/movie/popular?language=en-US&page="
+    
+    private var popURLSecond = "&api_key=70d908007f9009ecd412cca6ab70b158"
+    
+    private var page: Int = 1
     
     var rawDataPop: Data?
     var rawDataNow: Data?
@@ -42,7 +46,7 @@ class MovieService: JSONDecoder{
     
     func fetchData(completion: @escaping () -> Void){
         
-        let urlPop = URL(string: popURL)!
+        let urlPop = URL(string: getCompletePopURL())!
         let urlNow = URL(string: nowURL)!
         
         URLSession.shared.dataTask(with: urlPop) { (data, response, error) in
@@ -58,6 +62,7 @@ class MovieService: JSONDecoder{
             self.decodeData(data: data, movieType: .popular) {
                 print("??")
                 self.presenterDelegate?.updateValues()
+                self.presenterDelegate?.stopLoading()
             }
             
             
@@ -77,6 +82,7 @@ class MovieService: JSONDecoder{
             
             self.decodeData(data: data, movieType: .nowPlaying) {
                 self.presenterDelegate?.updateValues()
+                self.presenterDelegate?.stopLoading()
             }
             
         }
@@ -95,7 +101,7 @@ class MovieService: JSONDecoder{
             
             case .popular:
                 let decodedResponse = try JSONDecoder().decode(MovieResponse.self, from: data)
-                self.movieListPop = decodedResponse.results
+                self.movieListPop.append(contentsOf: decodedResponse.results)
             
             }
             
@@ -126,6 +132,17 @@ class MovieService: JSONDecoder{
             completionBlock(image, urlString)
         }
         .resume()
+    }
+    
+    func getCompletePopURL() -> String{
+        return popURLFirst+String(self.page)+popURLSecond
+    }
+    
+    func increasePage(){
+        self.page += 1
+        self.fetchData {
+            
+        }
     }
     
 }
