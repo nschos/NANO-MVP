@@ -23,9 +23,24 @@ class ViewController: UIViewController {
         
         self.moviePresenter.setViewDelegate(listMoviesViewDelegate: self)
         moviePresenter.viewDidLoad()
+        setRefreshControl()
         
         self.tableView.delegate = self
         self.tableView.dataSource = self
+    }
+    
+    private func setRefreshControl(){
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshAction), for: .valueChanged)
+        
+        self.tableView.refreshControl = refreshControl
+    }
+    
+    @objc private func refreshAction(){
+        moviePresenter.viewRefreshed()
+        DispatchQueue.main.async {
+            self.tableView.refreshControl?.endRefreshing()
+        }
     }
     
     //MARK: Segue
@@ -55,6 +70,12 @@ extension ViewController: UITableViewDelegate {
 
 //MARK: - UITableViewDataSource
 extension ViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.section == 1 && indexPath.row == moviePresenter.getNumberOfRowsInSection(section: 1) - 1{
+            //moviePresenter.viewDidScrollBottom()
+        }
+    }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return moviePresenter.getNumberOfSections()
